@@ -1,8 +1,19 @@
 .div-Opinion1 {
     padding: 40px;
+    width: 350px;
+  }
+.div-Opinion2 {
+    padding: 40px;
+    width: 400px;
+    
   }
   .div-Opinion1 h3{
-      color: #44A656;
+      color: #a36c22 ;
+      margin-top: 0;
+      text-align: center;
+  }
+  .div-Opinion2 h3{
+      color: #6f2205;
       margin-top: 0;
       text-align: center;
   }
@@ -19,7 +30,7 @@
   }
   
   .grid1 > article {
-    border: 2px solid #6C9448;
+    border: 2px solid #6f2205;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
   }
   
@@ -39,14 +50,20 @@
 }
 
 .btnAdd1{
-  background: rgb(17, 156, 58);
-  color:white;
+  background: #eacc97;
+  color:#6f2205;
  font-size: 15px;
+ border-radius: 20px;
 }
 
 .btnAdd1:hover{
-  color: rgb(17, 156, 58);
-  background:white;
+  color: #eacc97;
+  background:#6f2205;
   cursor: pointer;
 }
+
+
+
+
+
 

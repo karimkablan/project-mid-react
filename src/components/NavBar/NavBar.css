@@ -15,14 +15,14 @@ a {
 #navbar {
 	width: 100%;
 	display: flex;
-	background: #31bb2e;
+	background: #6f2205;
 	color: #fff;
-
+	height: 50px;
 }
 
 
 #navbar a {
-	color: #fff;
+	color: #eacc97;
 }
 
 #navbar ul {
@@ -34,13 +34,13 @@ a {
 #navbar ul li a {
 	display: flex;
 	flex-direction: row;
-	padding: 10px;
+	padding: 20px;
 	text-align: center;
 }
 
 #navbar ul li a.current,
 #navbar ul li a:hover {
-	background: #fff;
+	
     border-radius: 20%;
-	color: #31bb2e;
+	color: #fff;
 }

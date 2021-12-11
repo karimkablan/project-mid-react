@@ -1,44 +1,46 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import './order.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import isEmail from 'validator/lib/isEmail';
 
 
 const Order = () => {
+
+
     const [names, setNames] = useState('')
+    const [userId, setUserId] = useState('')
+    const [userEmail, setuserEmail] = useState('')
     const [email, setEmail] = useState('')
-    const [checkIn, setcheckIn] = useState("2021-11-02")
-    const [checkOut, setCheckOut] = useState("2021-11-02")
+    const [checkIn, setcheckIn] = useState("2021-12-09")
+    const [checkOut, setCheckOut] = useState("2021-12-09")
+    const [newTimeDate, setNewTimeDate] = useState("2021-12-09")
     const [number, setNumber] = useState('')
     const [requests, setRequests] = useState('No Requests')
     const [total, setTotal] = useState('')
     const [diffInDaysState, setdiffInDaysState] = useState('')
     const [state, setstate] = useState(true)
 
+    useEffect(() => {
+        if(localStorage.getItem("Data")){
+           let data = localStorage.getItem("Data") 
+            data = JSON.parse(data)
+          let id = data[0]._id;
+          let emailUser = data[0].email;
+          setUserId(id)
+          setuserEmail(emailUser)
+        }else{
+            setUserId("")
+            setuserEmail("")
+        }
+
+    }, [])
+
+    const refMessage = useRef()
+
     const pricePreNight = 3000;
 
-    const nameHandler = (e) => {
-        setNames(e.target.value);
-    }
-
-    const numberHandler = (e) => {
-        setNumber(e.target.value);
-    }
-
-    const emailHandler = (e) => {
-        setEmail(e.target.value);
-    }
-    const CheckInHandler = (e) => {
-        setcheckIn(e.target.value);
-    }
-    const CheckOutHandler = (e) => {
-        setCheckOut(e.target.value);
-    }
-    const requestsHandler = (e) => {
-        setRequests(e.target.value);
-    }
 
     const back = () => {
         setstate(!state)
@@ -55,10 +57,23 @@ const Order = () => {
 
 
     const addNewOrder = async () => {
-        const d = new Date();
-        const time = `Date ${d.getDay()} / ${d.getMonth() + 1} / ${d.getFullYear()} At ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} `;
-        if (names.trim().length !== 0 && number.trim().length === 10 && email.trim().length !== 0 ) {
+        let newOrderNumber = Date.now()
+        if(!(names.length > 1 )){
+            toast("Invalid Name")
+          }
+          else if(!(number.toString().length === 10)){
+            toast("Invalid Phone Number")
+          }
+        else if(!isEmail(`${email}`)){
+            toast("Invalid Email")
+          }
+          else if(!(total > 0)){
+            toast("No dates selected")
+          }
+          else{
             let data = {
+                userEmail:userEmail,
+                userId: userId,
                 name: names,
                 phoneNumber: number,
                 check_in: checkIn,
@@ -66,9 +81,9 @@ const Order = () => {
                 Email: email,
                 special_requests: requests,
                 price: total,
-                createdAt: time
+                numberOrder: newOrderNumber
             }
-            const res = await axios.post('https://617fe2b9055276001774fd71.mockapi.io/customers', data)
+            const res = await axios.post('http://localhost:5000/user/Order', data)
             console.log("post :", res)
             setNames('');
             setNumber('');
@@ -80,9 +95,7 @@ const Order = () => {
             setdiffInDaysState('');
             toast("Your order has been successfully received Our representative will get back to you to confirm the order")
             setstate(!state)
-        }
-        else {
-            toast("You entered incorrect information please update")
+            toast("The invitation has been sent to your email")
         }
 
     }
@@ -107,37 +120,86 @@ const Order = () => {
                 </p>
             </div>
             {state
-
                 ?
-
-                <div>
-                    <label> Phone Number: </label>
-                    <input className="btnAdd2" type="number" name="phone" placeholder="Enter Phone Number" value={number} onChange={numberHandler} /><br /><br />
-
-                    <label>  Name:  </label>
-                    <input  className="btnAdd2" type='text' name="name" placeholder="Enter Name" value={names} onChange={nameHandler} /> <br /><br />
-
-                    <label> Email:   </label>
-                    <input className="btnAdd2" type='email' name="email" placeholder="Enter Email" value={email} onChange={emailHandler} /> <br /><br />
-
-                    <label>   Check in: </label>
-                    <input className="btnAdd2" type="date" name="Check_in" value={checkIn} onChange={CheckInHandler} /> <br /><br />
-
-                    <label>  Check out:  </label>
-                    <input className="btnAdd2" type="date" name="Check_out" value={checkOut} onChange={CheckOutHandler} /> <br /><br />
-
-                    <label>     Special requests:  </label>
-                    <select className="btnAdd2" name="requests" onChange={requestsHandler} value={requests} >
+                <>
+                <div className="containerk">
+                <div className="formk">
+                    <div className="input-fieldk">
+                        <label >Name</label>
+                        <input
+                            className="input1"
+                            type="text"
+                            placeholder="Name"
+                            id="name"
+                            name="name"
+                            value={names}
+                            onChange={(e) => { setNames(e.target.value) }} />
+                    </div>
+                    <div className="input-fieldk">
+                        <label >Phone Number</label>
+                        <input
+                            className="input1"
+                            type="number"
+                            placeholder="Phone Number"
+                            id="number"
+                            name="number"
+                            value={number}
+                            onChange={(e) => { setNumber(e.target.value) }} />
+                    </div>
+                    <div className="input-fieldk">
+                        <label>Email</label>
+                        <input
+                            className="input1"
+                            type="email"
+                            placeholder="Email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => { setEmail(e.target.value) }} />
+                    </div>
+                    <div className="input-fieldk">
+                        <label >Check in</label>
+                        <input
+                            className="input1"
+                            type="date"
+                            id="Check_in"
+                            name="Check_in"
+                            min={newTimeDate}
+                            value={checkIn}
+                            onChange={(e) => { setcheckIn(e.target.value) }} />
+                    </div>
+                    <div className="input-fieldk">
+                        <label >Check out</label>
+                        <input
+                            className="input1"
+                            type="date"
+                            id="Check_out"
+                            name="Check_out"
+                            min={checkIn}
+                            value={checkOut}
+                            onChange={(e) => { setCheckOut(e.target.value) }} />
+                    </div>
+                    <div className="input-fieldk">
+                        <label > Special requests</label>
+                        <select className="btnAdd2" name="requests" onChange={(e) => { setRequests(e.target.value) }} value={requests} >
                         <option value="No_Requests">No Requests</option>
                         <option value="Baby_bed">Baby bed</option>
                         <option value="Late_arrival">Late arrival</option>
                         <option value="vegetarian_meal">vegetarian meal</option>
-                        <option value="birthday_party">birthday party</option>
-                    </select> <br /><br />
-                    <input className="btnAdd2" type="button" value="Price Calculate" onClick={CalculatePrice} /><br />
-                    <input className="btnAdd22" type="text" id="country" name="country" value={pricePreNight + " X " + diffInDaysState + " = " + total} readOnly /><br /><br />
-                    <input  className="btnAdd2" type="button" value="Send Order" onClick={sendOrder} />
+                        <option value="birthday_party">birthday party</option>  
+                        </select>
+                    </div>
+                    <div className="input-fieldk">
+                        <input className="btnAdd1" type="button" value="Price Calculate" onClick={CalculatePrice} />
+                        <input className="btn" type="text" id="country" name="country" value={pricePreNight + " X " + diffInDaysState + " = " + total} readOnly />
+                    </div>
+
+                    <div className="actionk">
+                        <button onClick={sendOrder} className="btnk">Send Order</button>
+                    </div>
                 </div>
+            </div>
+               </>
 
                 :
 
@@ -151,8 +213,10 @@ const Order = () => {
                     Special Requests : ➔ ➔  {requests}<br /><br />
                     Price : ➔ ➔ {total}<br /><br />
 
-                    <input type="button" className="btnAdd2" value="Update details" onClick={back} /><br /><br />
-                    <input type="button" className="btnAdd2" value="Confirm" onClick={addNewOrder} />
+                    <input type="button" className="btnAdd1" value="Update details" onClick={back} /><br /><br />
+                    <input type="button" className="btnAdd1" value="Confirm" onClick={addNewOrder} />
+
+                    <div className="msg" ref={refMessage}></div>
 
                 </div>}
                 <ToastContainer/>

@@ -2,6 +2,11 @@
 .div-home-flex-container{
     display: flex;
   }
+.div-home-flex-container-images{
+    display: flex;
+   margin-left: 400px;
+
+  }
   
   .div-home-flex-container > div {
     color: rgb(71, 71, 71);
@@ -10,27 +15,14 @@
     font-size: 25px;
   }
 
-  img{
-    width:450px;
-    height:300px;
-  }
-  
-
- img:hover {
-	transform: scale(1.10);
+body{
+  background-color: #eacc97;
 }
 
-video{
-  width:450px;
-  height:300px;
-}
 
-video:hover {
-	transform: scale(1.10);
-}
 
   .span {
-      color:#31bb2e;
+      color:#a36c22;
       font-weight: bold;
       font-size: 30px;
       font-family: 'Courier New', Courier, monospace;
@@ -44,3 +36,9 @@ video:hover {
     } 
 
   }
+
+  .msg{
+    color: rgb(235, 106, 0);
+    padding: 20px;
+    font-size: 20px;
+}

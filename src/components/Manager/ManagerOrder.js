@@ -9,14 +9,14 @@ const ManagerOrder = () => {
         getData();
     }, []);
     const getData = async () => {
-        await axios.get(`https://617fe2b9055276001774fd71.mockapi.io/customers`).then((res) => {
+        await axios.get(`http://localhost:5000/user/Order`).then((res) => {
             setdataOpinion(res.data);
         });
     };
 
 
     const deleteHandler = async (id) => {
-        const deleteRes = await axios.delete('https://617fe2b9055276001774fd71.mockapi.io/customers/' + id)
+        const deleteRes = await axios.delete('http://localhost:5000/user/Order/' + id)
         if (deleteRes.status === 200) {
             const stateList = [...dataOpinion];
             let resultOfNonDeleted = stateList.filter((user) => {
@@ -34,8 +34,10 @@ const ManagerOrder = () => {
                     <tbody>
                         <tr>
                             <th>Order Number</th>
+                          
                             <th>Name</th>
                             <th>Phone Number</th>
+                            <th>Email User</th>
                             <th>Email</th>
                             <th>Check In</th>
                             <th>Check Out</th>
@@ -47,10 +49,12 @@ const ManagerOrder = () => {
 
                         {dataOpinion.map((e) => {
                             return (
-                                <tr key={e.id}>
-                                    <td className="burdocolor">{e.id}</td>
+                                <tr className="burdocolor" key={e._id}>
+                                    <td>{e.numberOrder}</td>
+                                
                                     <td>{e.name}</td>
                                     <td>{e.phoneNumber}</td>
+                                    <td>{e.userId.email}</td>
                                     <td>{e.Email}</td>
                                     <td>{e.check_in}</td>
                                     <td>{e.check_out}</td>

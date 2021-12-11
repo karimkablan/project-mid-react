@@ -9,20 +9,21 @@ const ManagerOpinion = () => {
         getData();
     }, []);
     const getData = async () => {
-        await axios.get(`https://617fe2b9055276001774fd71.mockapi.io/Opinion`).then((res) => {
+        await axios.get(`http://localhost:5000/user/Opinion`).then((res) => {
             setdataOpinion(res.data);
         });
     };
 
 
     const deleteHandler = async (id) => {
-        const deleteRes = await axios.delete('https://617fe2b9055276001774fd71.mockapi.io/Opinion/'+ id)
+        const deleteRes = await axios.delete('http://localhost:5000/user/Opinion/'+ id)
         if (deleteRes.status === 200) {
             const stateList = [...dataOpinion];
             let resultOfNonDeleted = stateList.filter((user) => {
                 return user.id !== id
             })
             setdataOpinion(resultOfNonDeleted)
+            getData();
         }
     }
 
@@ -33,7 +34,7 @@ const ManagerOpinion = () => {
                 <table className="rwd-table">
                     <tbody>
                         <tr>
-                            <th>#</th>
+                            <th>Order Number</th>
                             <th>Name</th>
                             <th>Opinion</th>
                             <th>created At</th>
@@ -42,17 +43,17 @@ const ManagerOpinion = () => {
 
                         {dataOpinion.map((e) => {
                             return (
-                                <tr key={e.id}>
-                                    <td className="burdocolor">{e.id}</td>
+                                <tr className="burdocolor" key={e._id}>
+                                    <td>{e.numberOrder}</td>
                                     <td>{e.name}</td>
-                                    <td>{e.Opinion}</td>
+                                    <td>{e.textOpinion}</td>
                                     <td>{e.createdAt}--{e.createdAt2}</td>
                                     <td>
                                         {' '}
                                         <input
                                             type="button"
                                             onClick={() => {
-                                                deleteHandler(e.id);
+                                                deleteHandler(e._id);
                                             }}
                                             value="Delete"
                                         />

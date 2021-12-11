@@ -8,8 +8,8 @@
 
 .rwd-table tr:first-child {
   border-top: none;
-  background: #2cc04c;
-  color: rgba(56, 104, 41, 0.829);
+  background: #93b0d0;
+  color: #a36c22;
 
 }
 
@@ -45,7 +45,6 @@
 }
 
 .rwd-table {
-  color: rgb(21, 59, 24);
   border-radius: .4em;
   overflow: hidden;
 }
@@ -99,15 +98,15 @@
 
 
 
-input[type=button] {
-    background: rgb(17, 156, 58);
+.burdocolor input[type=button] {
+    background: #a36c22;
     color:white;
    font-size: 15px;
 }
 
 
-input[type=button]:hover {
-    color: rgb(17, 156, 58);
+.burdocolor input[type=button]:hover {
+    color: #a36c22;
     background:white;
     cursor: pointer;
 
@@ -125,13 +124,13 @@ input[type=button]:hover {
 
 
 .burdocolor {
-    color: rgb(58, 161, 10);
-    font-weight: bold;
+    color: #a36c22;
+   
 }
 
 h1{
   text-align: center;
-  color: #000;
+  color: #a36c22;
 }
 
 /*  =    ======== ===== = = */
@@ -143,7 +142,7 @@ h1{
   display: flex;
   align-items: center;
   justify-content: center;
-  background:hsl(210, 38%, 95%);
+  background:#eacc97;
 }
 
 .formk{
@@ -233,10 +232,47 @@ text-decoration:none;
 }
 
 
-.logOut{
-  margin-top: 12px;
-  margin-left: 20px;
-  border: 2px rgb(233, 130, 13) solid;
- 
+/* */
+
+.container8 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 97vw;
+	
 }
+
+
+
+
+#navbar8 {
+	width: 100%;
+	display: flex;
+  font-size: 18px;
+	height: 50px;
+}
+
+
+
+
+#navbar8 ul {
+	list-style: none;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#navbar8 ul li a {
+	display: flex;
+	flex-direction: row;
+	padding: 20px;
+	text-align: center;
+  color: #6f2205;
+}
+#navbar8 ul li a:hover {
+  font-weight: bold;
+  color: black;
+  
+}
+
+
 

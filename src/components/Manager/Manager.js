@@ -62,17 +62,17 @@ const Manager = () => {
                 :
                 <>
                     <Router>
-                        <nav id="navbar">
-                            <div className="container">
-                                <ul className="div-home">
+                        <nav id="navbar8">
+                            <div className="container8">
+                                <ul className="div-home8">
                                     <li>
-                                        <Link to="/ManagerOrder">Orders Table</Link>
+                                        <Link to="/ManagerOrder"><i className="fas fa-crown"> Orders Table</i></Link>
                                     </li>
                                     <li>
-                                        <Link to="/ManagerOpinion">Opinion Table</Link>
+                                        <Link to="/ManagerOpinion"><i className="fas fa-crown"> Opinion Table</i></Link>
                                     </li>
                                     <li>
-                                        <input className="logOut" onClick={logOut} type="button" value="log out " />
+                                        <Link to="/Manager/Manager" onClick={logOut}><i className="fas fa-sign-out-alt"> logout</i> </Link>
                                     </li>
                                 </ul>
                             </div>

@@ -5,7 +5,7 @@
     align-items: center;
     padding: 20px;
     font-size: 20px;
-    color: rgb(39, 128, 131);
+    color: #a36c22;
     font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .order_div p{
-  color: rgb(14, 14, 14);
+  color: #a36c22;
   font-weight: 700;
    }
 
@@ -28,25 +28,21 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .btnAdd2{
-  background: #31BB2E;
-  color:white;
+
  font-size: 15px;
 }
 
 .btnAdd2:hover{
-  color: #31BB2E;
-  background:white;
+
   cursor: pointer;
 }
 
-.btnAdd22{
-  background: #31BB2E;
-  color:white;
+.btn{
  font-size: 15px;
  border: 4px rgb(68, 60, 60)d solid;
 }
 
-.btnAdd22:hover{
+.btn:hover{
   color: #d80000;
   background:white;
   cursor:no-drop;
